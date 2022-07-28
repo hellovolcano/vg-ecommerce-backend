@@ -5,13 +5,20 @@ const { Category, Product } = require('../../models');
 
 // GET all categories
 router.get('/', (req, res) => {
-  Category.findAll()
+  Category.findAll({
+    attributes: ['id','category_name'],
+    include: [
+      {
+        model: Product,
+        attributes: [ 'id','product_name']
+      }
+    ]
+  })
     .then(dbCategoryData => res.json(dbCategoryData))
     .catch(err => {
       console.log(err)
       res.status(500).json(err)
     })
-  // TODO: include its associated Products
 });
 
 // GET one category by ID
@@ -19,7 +26,13 @@ router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    include: [
+      {
+        model: Product,
+        attributes: ['id','product_name']
+      }
+    ]
   })
   .then(dbCategoryData => {
     if (!dbCategoryData) {
@@ -27,7 +40,6 @@ router.get('/:id', (req, res) => {
       return
     }
     res.json(dbCategoryData)
-  // TODO: include its associated Products
   })
   .catch(err => {
     console.log(err)
@@ -50,7 +62,7 @@ router.post('/', (req, res) => {
 // UPDATE a category name
 router.put('/:id', (req, res) => {
   Category.update( req.body, {
-    individualHooks: true.valueOf,
+    category_name: req.body.category_name,
     where: {
       id: req.params.id
     }
