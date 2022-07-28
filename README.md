@@ -4,7 +4,7 @@ This project is the backend of an ecommerce website, with a fully functional con
 
 ## Links
 - [Deployed Application](https://secret-dusk-51605.herokuapp.com/)
-- [Walkthrough Video](https://watch.screencastify.com/v/tZMoRTlrqdF9bKds5gfz)
+- [Walkthrough Video](https://drive.google.com/file/d/10LSngVZGq-uren_4gg9DRCW61SMTCGy-/view)
 
 ## Installation
 Run npm install to get the required dependencies
